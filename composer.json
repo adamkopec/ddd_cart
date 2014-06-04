@@ -1,0 +1,21 @@
+{
+    "name": "adamkopec/ddd_cart",
+    "description": "An example of DDD in PHP project [Shopping Cart]",
+    "require": {
+        "zendframework/zendframework1": "1.*",
+        "doctrine/doctrine1": "1.2.*",
+        "phpunit/phpunit": "*",
+        "monolog/monolog": "*",
+        "nicolopignatelli/valueobjects": "*",
+        "beberlei/assert": "*",
+        "symfony/dependency-injection": "*",
+        "symfony/config": "*",
+        "maximebf/events": "*"
+    },
+    "authors": [
+        {
+            "name": "Adam Kopeć",
+            "email": "adam.kopec@gmail.com"
+        }
+    ]
+}

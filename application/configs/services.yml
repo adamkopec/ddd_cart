@@ -1,0 +1,6 @@
+services:
+  repository.product:
+    class:  Application\Product\Repository
+
+  factories.product:
+    class: Application\Product\Factory\SimpleFactory
