@@ -9,6 +9,6 @@
 namespace Application\Product\Exception;
 
 
-class ProductNotFoundException extends Exception {
+class ProductNotFoundException extends \Exception {
 
 } 

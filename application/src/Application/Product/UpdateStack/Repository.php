@@ -9,6 +9,8 @@
 namespace Application\Product\UpdateStack;
 
 use Application\Product\Entities\Product;
+use Application\Product\Exception\ProductNotFoundException;
+use Application\Product\Exception\ProductPersistenceException;
 use Rhumsaa\Uuid\Uuid;
 
 interface Repository {
@@ -19,5 +21,10 @@ interface Repository {
      */
     public function getById(Uuid $id);
 
+    /**
+     * @param Product $p
+     * @return void
+     * @throws ProductPersistenceException
+     */
     public function persist(Product $p);
 } 
