@@ -6,13 +6,13 @@
  * Time: 00:40
  */
 
-namespace Application\Product\Entities;
+namespace Product\Entities;
 
 use Rhumsaa\Uuid\Uuid;
 use Infrastructure\AggregateRoot;
-use Application\Product\Exception\ProductInvariantException;
-use Application\Product\PricePolicy;
-use Application\Product\PriceType;
+use Product\Exception\ProductInvariantException;
+use Product\PricePolicy;
+use Product\PriceType;
 
 class Product extends AggregateRoot {
     /** @var  Uuid $id */
@@ -21,12 +21,12 @@ class Product extends AggregateRoot {
     private $name;
     /** @var  bool */
     private $archived;
-    /** @var  PricePolicy */
-    private $pricePolicy;
+    /** @var  PricePolicy[] */
+    private $pricePolicies = array();
 
-    public function __construct(Uuid $id, PricePolicy $policy) {
+    public function __construct(Uuid $id, array $policies) {
         $this->id = $id;
-        $this->pricePolicy = $policy;
+        $this->pricePolicies = $policies;
     }
 
     /** @param string $name */
@@ -58,6 +58,6 @@ class Product extends AggregateRoot {
      * @return \ValueObjects\Money\Money
      */
     public function getPrice(PriceType $priceType) {
-        return $this->pricePolicy->getPrice($priceType);
+        return $this->pricePolicies[$priceType->toNative()]->getPrice($this);
     }
 } 

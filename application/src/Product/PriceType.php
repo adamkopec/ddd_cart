@@ -6,7 +6,7 @@
  * Time: 01:27
  */
 
-namespace Application\Product;
+namespace Product;
 
 use ValueObjects\Enum\Enum;
 

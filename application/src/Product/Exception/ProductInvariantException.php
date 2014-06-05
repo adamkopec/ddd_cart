@@ -6,7 +6,7 @@
  * Time: 01:15
  */
 
-namespace Application\Product\Exception;
+namespace Product\Exception;
 
 
 class ProductInvariantException extends \Exception {

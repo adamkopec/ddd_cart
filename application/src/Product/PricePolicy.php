@@ -6,14 +6,15 @@
  * Time: 01:20
  */
 
-namespace Application\Product;
+namespace Product;
 
 use ValueObjects\Money\Money;
+use Product\Entities\Product;
 
 interface PricePolicy {
     /**
-     * @param PriceType $priceType
+     * @param Product $product
      * @return Money
      */
-    public function getPrice(PriceType $priceType);
+    public function getPrice(Product $product);
 } 

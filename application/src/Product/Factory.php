@@ -6,7 +6,7 @@
  * Time: 00:47
  */
 
-namespace Application\Product;
+namespace Product;
 
 interface Factory {
     /**

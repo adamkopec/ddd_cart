@@ -6,7 +6,7 @@
  * Time: 01:34
  */
 
-namespace Application\Product\Exception;
+namespace Product\Exception;
 
 
 class ProductNotFoundException extends \Exception {

@@ -13,7 +13,7 @@ class IndexController extends Zend_Controller_Action
         $bootstrap = $this->getInvokeArg('bootstrap');
         /** @var \Bootstrap $bootstrap */
         $productRepository = $bootstrap->getResource('container')->get('repository.product');
-        /** @var  Application\Product\Repository $productRepository */
+        /** @var  Product\Repository $productRepository */
         $this->view->products = $productRepository->getAll();
     }
 }

@@ -6,7 +6,9 @@
  * Time: 22:49
  */
 
-namespace Application\Product;
+namespace Product\ReadStack;
+
+use Product\ProductData;
 
 interface Repository {
     /**

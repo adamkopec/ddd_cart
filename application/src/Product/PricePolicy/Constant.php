@@ -6,11 +6,14 @@
  * Time: 01:36
  */
 
-namespace Application\Product\PricePolicy;
+namespace Product\PricePolicy;
 
-use Application\Product\PricePolicy;
-use Application\Product\PriceType;
+use Product\PricePolicy;
+use Product\Entities\Product;
 use ValueObjects\Money\Money;
+use Assert\Assertion;
+
+
 
 class Constant implements PricePolicy {
 
@@ -18,14 +21,14 @@ class Constant implements PricePolicy {
 
     public function __construct(Money $value) {
         $this->value = $value;
+        Assertion::min($value->getAmount(), 0, "Price value is less than zero");
     }
 
     /**
-     * @param PriceType $priceType
+     * @param Product $product
      * @return Money
      */
-    public function getPrice(PriceType $priceType) {
-        // TODO: Implement getPrice() method.
-        //czas na małą refaktoryzację
+    public function getPrice(Product $product) {
+        return $this->value;
     }
 } 

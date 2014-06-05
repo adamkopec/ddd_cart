@@ -6,11 +6,11 @@
  * Time: 01:31
  */
 
-namespace Application\Product\UpdateStack;
+namespace Product\UpdateStack;
 
-use Application\Product\Entities\Product;
-use Application\Product\Exception\ProductNotFoundException;
-use Application\Product\Exception\ProductPersistenceException;
+use Product\Entities\Product;
+use Product\Exception\ProductNotFoundException;
+use Product\Exception\ProductPersistenceException;
 use Rhumsaa\Uuid\Uuid;
 
 interface Repository {

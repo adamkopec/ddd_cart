@@ -6,7 +6,7 @@
  * Time: 15:31
  */
 
-namespace Application\Product\Exception;
+namespace Product\Exception;
 
 
 class ProductPersistenceException extends \Exception {
