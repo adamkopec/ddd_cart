@@ -1,0 +1,42 @@
+OrmProduct:
+  tableName: product
+  columns:
+    id: &PRIMARY
+      type: integer
+      notnull: false
+      primary: true
+      unsigned: true
+      autoincrement: true
+    name:
+      type: text
+    catalog_price:
+      type: decimal(10)
+      scale: 2
+
+OrmProductPriceRule:
+  tableName: product_price_rule
+  columns:
+    id:
+      <<: *PRIMARY
+    product_id:
+      type: integer
+      notnull: true
+    price_type:
+      type: enum
+      values: [minimal, selling, catalog]
+  relations:
+    product:
+      local: product_id
+      foreign: id
+      type: one
+      foreignType: many
+      foreignAlias: rules
+      class: OrmProduct
+
+OrmProductPriceRuleFactor:
+  tableName: product_price_rule_factor
+  inheritance:
+    extends: OrmProductPriceRule
+    type: concrete
+  columns:
+    factor: float

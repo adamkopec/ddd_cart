@@ -10,7 +10,9 @@
         "beberlei/assert": "*",
         "symfony/dependency-injection": "*",
         "symfony/config": "*",
-        "maximebf/events": "*"
+        "maximebf/events": "*",
+        "codeception/codeception": "*",
+        "deresh/sfyaml": "dev-master"
     },
     "authors": [
         {

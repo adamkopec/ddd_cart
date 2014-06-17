@@ -1,6 +1,7 @@
 services:
-  repository.product:
-    class:  Application\Product\Repository
+  front.product.factory:
+    class: "Product\ReadStack\Factory\Doctrine"
 
-  factories.product:
-    class: Application\Product\Factory\SimpleFactory
+  front.product.repository:
+    class:  "Product\ReadStack\Repository\Doctrine"
+    arguments: ["@front.product.factory"]

@@ -28,7 +28,7 @@ class Namespaces extends \Zend_Application_Resource_ResourceAbstract {
     }
 
     private function _registerNamespace(\Zend_Loader_Autoloader $autoLoader, $namespace) {
-        $autoLoader->unshiftAutoloader($this->_getLoader(), $namespace);
+        $autoLoader->pushAutoloader($this->_getLoader(), $namespace);
         $this->getBootstrap()
             ->getApplication()
             ->getAutoloader()
@@ -37,8 +37,8 @@ class Namespaces extends \Zend_Application_Resource_ResourceAbstract {
 
     private function _getLoader() {
         $loader = function ($className) {
-            $className = str_replace('\\', '_', $className);
-            \Zend_Loader_Autoloader::autoload($className);
+            $className = str_replace('\\', '/', $className);
+            require_once($className . '.php');
         };
         return $loader;
     }

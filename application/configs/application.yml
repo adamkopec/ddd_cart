@@ -1,0 +1,59 @@
+production:
+  phpSettings:
+    display_startup_errors: 0
+    display_errors: 0
+  includePaths:
+    src: APPLICATION_PATH/src
+    models: APPLICATION_PATH/models
+    generated: APPLICATION_PATH/models/generated
+  bootstrap:
+    path: APPLICATION_PATH/Bootstrap.php
+    class: "Bootstrap"
+  appnamespace: "Application"
+  autoloaderNamespaces:
+    - Orm
+    - BaseOrm
+  resources:
+    frontController:
+      controllerDirectory: APPLICATION_PATH/controllers
+      params:
+        displayExceptions: 0
+    namespaces:
+      names:
+        - Application
+        - Product
+        - Basket
+        - Order
+        - Infrastructure
+    container:
+      configPath: APPLICATION_PATH/configs
+      configs:
+        - services.yml
+    doctrine:
+      connections:
+        db: "sqlite:APPLICATION_PATH/resources/db/cart.db"
+      config:
+        data_fixtures_path: APPLICATION_PATH/doctrine/fixtures
+        models_path: APPLICATION_PATH/models
+        migrations_path: APPLICATION_PATH/doctrine/migrations
+        sql_path: APPLICATION_PATH/doctrine/sql
+        yaml_schema_path: APPLICATION_PATH/doctrine/schema
+
+staging:
+  _extends: production
+
+testing:
+  _extends: production
+  phpSettings:
+    display_startup_errors: 1
+    display_errors: 1
+
+development:
+  _extends: production
+  phpSettings:
+    display_startup_errors: 1
+    display_errors: 1
+  resources:
+    frontController:
+      params:
+        displayExceptions: 1

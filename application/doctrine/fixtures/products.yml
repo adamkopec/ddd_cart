@@ -1,0 +1,27 @@
+OrmProduct:
+  First:
+    name: Pierwszy produkt
+    catalog_price: 100.00
+  Second:
+    name: Drugi produkt
+    catalog_price: 80.00
+  Third:
+    name: Trzeci produkt
+    catalog_price: 60.00
+
+OrmProductPriceRuleFactor:
+  selling_95:
+    factor: 0.95
+    price_type: selling
+    product:
+      First
+  minimal_80:
+    factor: 0.8
+    price_type: minimal
+    product:
+      First
+  minimal_60:
+    factor: 0.6
+    price_type: minimal
+    product:
+      Second
