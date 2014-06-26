@@ -8,13 +8,26 @@
 
 namespace Basket\Entities;
 
+use ValueObjects\Money\Money;
+use Rhumsaa\Uuid\Uuid;
+use Common\Unit;
 
 class Product {
+    /** @var  Uuid */
     private $id;
+    /** @var  int */
     private $quantity;
+    /** @var  Money */
     private $price;
-    private $total;
+    /** @var  Unit */
     private $unit;
 
-    //to be continued...
+    public function __construct(Uuid $id) {
+        $this->id = $id;
+    }
+
+    public function getTotal() {
+        return $this->price * $this->quantity;
+    }
+
 }

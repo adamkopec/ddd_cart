@@ -1,43 +1,49 @@
 production:
-  phpSettings:
-    display_startup_errors: 0
-    display_errors: 0
-  includePaths:
-    src: APPLICATION_PATH/src
-    models: APPLICATION_PATH/models
-    generated: APPLICATION_PATH/models/generated
-  bootstrap:
-    path: APPLICATION_PATH/Bootstrap.php
-    class: "Bootstrap"
   appnamespace: "Application"
   autoloaderNamespaces:
     - Orm
     - BaseOrm
+  bootstrap:
+    path: APPLICATION_PATH/Bootstrap.php
+    class: "Bootstrap"
+  includePaths:
+    src: APPLICATION_PATH/src
+    models: APPLICATION_PATH/models
+    generated: APPLICATION_PATH/models/generated
+  phpSettings:
+    display_startup_errors: 0
+    display_errors: 0
   resources:
-    frontController:
-      controllerDirectory: APPLICATION_PATH/controllers
-      params:
-        displayExceptions: 0
-    namespaces:
-      names:
-        - Application
-        - Product
-        - Basket
-        - Order
-        - Infrastructure
     container:
       configPath: APPLICATION_PATH/configs
       configs:
         - services.yml
     doctrine:
-      connections:
-        db: "sqlite:APPLICATION_PATH/resources/db/cart.db"
       config:
         data_fixtures_path: APPLICATION_PATH/doctrine/fixtures
-        models_path: APPLICATION_PATH/models
         migrations_path: APPLICATION_PATH/doctrine/migrations
+        models_path: APPLICATION_PATH/models
         sql_path: APPLICATION_PATH/doctrine/sql
         yaml_schema_path: APPLICATION_PATH/doctrine/schema
+      connections:
+        db: "sqlite:APPLICATION_PATH/resources/db/cart.db"
+    frontController:
+      controllerDirectory: APPLICATION_PATH/controllers
+      moduleDirectory: APPLICATION_PATH/modules
+      params:
+        displayExceptions: 0
+    modules:
+    namespaces:
+      names:
+        - Application
+        - Basket
+        - Infrastructure
+        - Order
+        - Product
+    routes:
+      options:
+        files:
+          - routes.yml
 
 staging:
   _extends: production

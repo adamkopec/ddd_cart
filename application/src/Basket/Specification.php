@@ -12,8 +12,8 @@ use Basket\Entities\Product;
 
 interface Specification {
     /**
-     * @param Product $p
+     * @param Product $product
      * @return bool
      */
-    public function isMetBy(Product $p);
+    public function isMetBy(Product $product);
 } 
