@@ -32,6 +32,8 @@ production:
       moduleDirectory: APPLICATION_PATH/modules
       params:
         displayExceptions: 0
+    layout:
+      layoutPath: "APPLICATION_PATH/layout/scripts"
     modules:
     namespaces:
       names:
@@ -41,9 +43,8 @@ production:
         - Order
         - Product
     routes:
-      options:
-        files:
-          - routes.yml
+      files:
+        - "APPLICATION_PATH/configs/routes.yml"
 
 staging:
   _extends: production

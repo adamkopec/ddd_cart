@@ -4,3 +4,4 @@ composer.lock
 .idea/*
 tests/_output/*
 .DS_Store
+bower_components/*

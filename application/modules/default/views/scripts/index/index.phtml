@@ -1,0 +1,29 @@
+<h1>Produkty</h1>
+<table class="mainProductTable table">
+    <thead>
+        <tr>
+            <th>L.p.</th>
+            <th>Nazwa</th>
+            <th>Cena</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php $i=1; ?>
+    <?php foreach($this->products as $product): ?>
+        <tr class="productRow">
+            <td><?= $i; ?></td>
+            <td><?= $product->getName(); ?></td>
+            <td><?= $product->getSellingPrice(); ?></td>
+            <td>
+                <form action="<?= $this->url(array(), 'basket_add', true); ?>" method="post">
+                    <input type="hidden" value="<?= $product->getId(); ?>" name="id" />
+                    <input type="hidden" value="1" name="quantity" />
+                    <input type="submit" value="Dodaj do koszyka" class="btn btn-sm btn-default"/>
+                </form>
+            </td>
+        </tr>
+        <?php $i++; ?>
+    <?php endforeach; ?>
+    </tbody>
+</table>

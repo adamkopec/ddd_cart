@@ -1,0 +1,15 @@
+basket_add:
+  type: Zend_Controller_Router_Route_Static
+  route: add_to_basket
+  defaults:
+    module: basket
+    controller: product
+    action: add
+
+catalog:
+  type: Zend_Controller_Router_Route_Static
+  route: /
+  defaults:
+    module: default
+    controller: index
+    action: index
