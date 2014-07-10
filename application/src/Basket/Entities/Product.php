@@ -16,7 +16,7 @@ class Product {
     /** @var  Uuid */
     private $id;
     /** @var  int */
-    private $quantity;
+    private $quantity = 0;
     /** @var  Money */
     private $price;
     /** @var  Unit */
@@ -29,5 +29,35 @@ class Product {
     public function getTotal() {
         return $this->price * $this->quantity;
     }
+
+    /**
+     * @param \ValueObjects\Money\Money $price
+     */
+    public function setPrice($price) {
+        $this->price = $price;
+    }
+
+    /**
+     * @return \ValueObjects\Money\Money
+     */
+    public function getPrice() {
+        return $this->price;
+    }
+
+    /**
+     * @param int $quantity
+     */
+    public function setQuantity($quantity) {
+        $this->quantity = (int)$quantity;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantity() {
+        return $this->quantity;
+    }
+
+
 
 }

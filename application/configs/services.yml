@@ -5,3 +5,9 @@ services:
   front.product.repository:
     class:  "Product\ReadStack\Repository\Doctrine"
     arguments: ["@front.product.factory"]
+
+  basket.forms.add.builder:
+    class: "\Basket_Form_Add_Builder"
+
+  basket.forms.add.handler:
+    class: "\Basket_Form_Add_Handler"

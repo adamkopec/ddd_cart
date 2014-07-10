@@ -11,6 +11,7 @@ namespace Basket\Service\ProductAdder;
 use Basket\Entities\Basket;
 use Basket\Service\ProductAdder;
 use Product\Entities\Product;
+use Basket\Product\Factory;
 
 class Simple implements ProductAdder {
     /** @var  Factory */
@@ -22,6 +23,7 @@ class Simple implements ProductAdder {
 
     public function add(Product $product, Basket $basket) {
         $basketProduct = $this->factory->createFromProduct($product);
+        $basketProduct->setQuantity(1);
         $basket->addProduct($basketProduct);
     }
 } 
