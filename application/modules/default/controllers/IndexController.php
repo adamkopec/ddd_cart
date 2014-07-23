@@ -4,9 +4,10 @@ class IndexController extends Zend_Controller_Action
 {
     public function indexAction()
     {
-        $productRepository = $this->_helper->container()->get('front.product.repository');
-        /** @var  Product\ReadStack\Repository $productRepository */
-        $this->view->products = $productRepository->getAll();
+        $container = $this->_helper->container();
+        /** @var Infrastructure\Model $model */
+        $model = $container->get('front.product.model.catalog');
+        $this->view->assign($model->getValues());
     }
 }
 

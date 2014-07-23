@@ -2,41 +2,88 @@ OrmProduct:
   tableName: product
   columns:
     id: &PRIMARY
-      type: integer
-      notnull: false
+      type: string
+      notnull: true
       primary: true
-      unsigned: true
-      autoincrement: true
+      length: 36 #UUID
     name:
-      type: text
+      type: string
     catalog_price:
       type: decimal(10)
       scale: 2
+    unit_id: &FOREIGN
+      type: string
+      length: 36
+  relations:
+    OrmUnit:
+      local: unit_id
+      foreign: id
+      type: one
 
-OrmProductPriceRule:
-  tableName: product_price_rule
+OrmUnit:
+  tableName: unit
   columns:
     id:
       <<: *PRIMARY
-    product_id:
-      type: integer
-      notnull: true
-    price_type:
-      type: enum
-      values: [minimal, selling, catalog]
+    name:
+      type: string
+    symbol:
+      type: string
+
+OrmUnitConversion:
+  tableName: unit_conversion
+  columns:
+    id:
+      <<: *PRIMARY
+    from_id:
+      <<: *FOREIGN
+    to_id:
+      <<: *FOREIGN
+    factor: float
   relations:
-    product:
+    OrmUnitFrom:
+      class: OrmUnit
+      local: from_id
+      foreign: id
+      type: one
+    OrmUnitTo:
+      class: OrmUnit
+      local: from_id
+      foreign: id
+      type: one
+
+OrmBasket:
+  tableName: basket
+  columns:
+    id:
+      <<: *PRIMARY
+    session_id:
+      type: string
+      length: 64
+
+OrmBasketProduct:
+  tableName: basket_product
+  columns:
+    id:
+      <<: *PRIMARY
+    basket_id:
+      <<: *FOREIGN
+    product_id:
+      <<: *FOREIGN
+    unit_id:
+      <<: *FOREIGN
+    quantity:
+      type: integer
+  relations:
+    OrmBasket:
+      local: basket_id
+      foreign: id
+      type: one
+    OrmProduct:
       local: product_id
       foreign: id
       type: one
-      foreignType: many
-      foreignAlias: rules
-      class: OrmProduct
-
-OrmProductPriceRuleFactor:
-  tableName: product_price_rule_factor
-  inheritance:
-    extends: OrmProductPriceRule
-    type: concrete
-  columns:
-    factor: float
+    OrmUnit:
+      local: unit_id
+      foreign: id
+      type: one

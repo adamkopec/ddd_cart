@@ -45,7 +45,7 @@ class Doctrine implements Repository {
     private function _getBaseQuery() {
         $q = \Doctrine_Query::create()
             ->from('OrmProduct p')
-            ->leftJoin('p.rules r');
+            ->leftJoin('p.OrmUnit u');
         return $q;
     }
 

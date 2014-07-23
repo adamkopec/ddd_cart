@@ -6,8 +6,12 @@ services:
     class:  "Product\ReadStack\Repository\Doctrine"
     arguments: ["@front.product.factory"]
 
+  front.product.model.catalog:
+    class: "\Default_Model_Catalog"
+    arguments: ["@front.product.repository", "@basket.forms.add.builder"]
+
   basket.forms.add.builder:
-    class: "\Basket_Form_Add_Builder"
+    class: "Basket\Form\Add\Builder"
 
   basket.forms.add.handler:
-    class: "\Basket_Form_Add_Handler"
+    class: "Basket\Form\Add\Handler"

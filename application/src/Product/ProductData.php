@@ -16,11 +16,11 @@ class ProductData {
     /** @var  string */
     private $name;
     /** @var  Money */
-    private $minimalPrice;
-    /** @var  Money */
-    private $sellingPrice;
+    private $catalogPrice;
     /** @var  bool */
     private $archived;
+    /** @var  string */
+    private $unitSymbol;
 
     /**
      * @param boolean $archived
@@ -51,20 +51,6 @@ class ProductData {
     }
 
     /**
-     * @param \ValueObjects\Money\Money $minimalPrice
-     */
-    public function setMinimalPrice($minimalPrice) {
-        $this->minimalPrice = $minimalPrice;
-    }
-
-    /**
-     * @return \ValueObjects\Money\Money
-     */
-    public function getMinimalPrice() {
-        return $this->minimalPrice;
-    }
-
-    /**
      * @param string $name
      */
     public function setName($name) {
@@ -81,14 +67,28 @@ class ProductData {
     /**
      * @param \ValueObjects\Money\Money $sellingPrice
      */
-    public function setSellingPrice($sellingPrice) {
-        $this->sellingPrice = $sellingPrice;
+    public function setCatalogPrice($sellingPrice) {
+        $this->catalogPrice = $sellingPrice;
     }
 
     /**
      * @return \ValueObjects\Money\Money
      */
-    public function getSellingPrice() {
-        return $this->sellingPrice;
+    public function getCatalogPrice() {
+        return $this->catalogPrice;
+    }
+
+    /**
+     * @param string $unitName
+     */
+    public function setUnitSymbol($unitName) {
+        $this->unitSymbol = $unitName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUnitSymbol() {
+        return $this->unitSymbol;
     }
 } 

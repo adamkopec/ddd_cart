@@ -6,9 +6,11 @@
  * Time: 17:03
  */
 
-class Basket_Form_Add_Handler implements Infrastructure\Form\Handler {
+namespace Basket\Form\Add;
 
-    /** @var  Basket\Command\Factory */
+class Handler implements \Infrastructure\Form\Handler {
+
+    /** @var  \Basket\Command\Factory */
     private $commandFactory;
 
     /**

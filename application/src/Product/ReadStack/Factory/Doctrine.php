@@ -21,9 +21,9 @@ class Doctrine implements Factory {
         $p = new ProductData();
         $p->setName($source->name);
         $p->setId($source->id);
-        $p->setSellingPrice(Money::fromNative($source->catalog_price, 'PLN'));
+        $p->setCatalogPrice(Money::fromNative($source->catalog_price, 'PLN'));
+        $p->setUnitSymbol($source->OrmUnit->symbol);
 
-        //etc.
         return $p;
     }
 

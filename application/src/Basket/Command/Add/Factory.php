@@ -10,4 +10,4 @@ namespace Basket\Command\Add;
 
 interface Factory {
     public function getCommand();
-} 
+}

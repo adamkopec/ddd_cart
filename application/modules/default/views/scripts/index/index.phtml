@@ -14,13 +14,15 @@
         <tr class="productRow">
             <td><?= $i; ?></td>
             <td><?= $product->getName(); ?></td>
-            <td><?= $product->getSellingPrice(); ?></td>
+            <td><?= $product->getCatalogPrice(); ?></td>
             <td>
-                <form action="<?= $this->url(array(), 'basket_add', true); ?>" method="post">
-                    <input type="hidden" value="<?= $product->getId(); ?>" name="id" />
-                    <input type="hidden" value="1" name="quantity" />
-                    <input type="submit" value="Dodaj do koszyka" class="btn btn-sm btn-default"/>
-                </form>
+                <?= $this->productForms[$product->getId()]
+                    ->setAction($this->url(array(), 'basket_add', true))
+                    ->setMethod('post')
+                    ->setDecorators(array(array('ViewScript', array(
+                    'viewScript' => 'forms/add.phtml',
+                    'product'=> $product,
+                )))); ?>
             </td>
         </tr>
         <?php $i++; ?>

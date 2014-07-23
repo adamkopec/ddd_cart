@@ -1,27 +1,46 @@
 OrmProduct:
   First:
-    name: Pierwszy produkt
+    id: 16665d0f-8967-4e58-a98a-1a5dcad4f24b
+    name: Jajko
     catalog_price: 100.00
+    OrmUnit:
+      sztuka
   Second:
-    name: Drugi produkt
+    id: 28d5431d-902c-48d1-87ad-780e8a298a56
+    name: Farba
     catalog_price: 80.00
+    OrmUnit:
+      litr
   Third:
-    name: Trzeci produkt
+    id: e1beed14-2763-45bc-9f61-e3cd74f39254
+    name: Węgiel
     catalog_price: 60.00
+    OrmUnit:
+      tona
 
-OrmProductPriceRuleFactor:
-  selling_95:
-    factor: 0.95
-    price_type: selling
-    product:
-      First
-  minimal_80:
-    factor: 0.8
-    price_type: minimal
-    product:
-      First
-  minimal_60:
-    factor: 0.6
-    price_type: minimal
-    product:
-      Second
+OrmUnit:
+  sztuka:
+    id: e94f0353-281f-48c9-90e8-9ec219f4dc25
+    name: Sztuka
+    symbol: szt.
+  wytlaczanka:
+    id: d8479410-f4e0-4600-a339-9931c68794f8
+    name: Wytłaczanka
+    symbol: wytł.
+  litr:
+    id: aeb46e20-79e5-4690-81c0-8a7059cebb34
+    name: Litr
+    symbol: l
+  tona:
+    id: 96070dc2-91c1-498c-ba4b-f647308ddd3c
+    name: Tona
+    symbol: t
+
+OrmUnitConversion:
+  szt_wyt:
+    id: 59c137b7-c8ba-48b7-bf9c-788f6dc346c0
+    factor: 12
+    OrmUnitFrom:
+      sztuka
+    OrmUnitTo:
+      wytlaczanka
