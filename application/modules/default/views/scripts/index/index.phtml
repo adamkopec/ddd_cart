@@ -17,11 +17,9 @@
             <td><?= $product->getCatalogPrice(); ?></td>
             <td>
                 <?= $this->productForms[$product->getId()]
-                    ->setAction($this->url(array(), 'basket_add', true))
-                    ->setMethod('post')
                     ->setDecorators(array(array('ViewScript', array(
                     'viewScript' => 'forms/add.phtml',
-                    'product'=> $product,
+                    'product'=> $product
                 )))); ?>
             </td>
         </tr>

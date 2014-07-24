@@ -1,3 +1,8 @@
+<?php
+$this->element
+    ->setAction($this->url(array(), 'basket_add', true))
+    ->setMethod('post');
+?>
 <form class="form-inline" action="<?php echo $this->element->getAction(); ?>" method="<?php echo $this->element->getMethod(); ?>">
     <?= $this->element->quantity->setAttrib('class', 'form-control'); ?>
     <label class="" for="quantity"><?= $this->product->getUnitSymbol(); ?></label>

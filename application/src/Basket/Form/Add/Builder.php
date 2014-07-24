@@ -33,7 +33,9 @@ class Builder implements \Infrastructure\Form\Builder {
      */
     public function getForm() {
         $form = new \Basket\Form\Add();
-        $form->setDefault('productId', $this->productId);
+        if (!is_null($this->productId)) {
+            $form->setDefault('productId', $this->productId);
+        }
         return $form;
     }
 
