@@ -2,6 +2,23 @@ parameters:
     customer.session.namespace: customer
 
 services:
+  basket.add.command.dispatcher:
+    class: "Basket\Command\Dispatcher\AddProduct"
+
+  command.dispatchers:
+    - "@basket.add.command.dispatcher"
+
+  command.dispatcher.identity_resolver:
+    class: "Infrastructure\CommandDispatcher\IdentityResolver"
+
+  command.dispatcher.identity_map:
+    class: "Infrastructure\IdentityMap"
+    arguments: ["@command.dispatcher.identity_resolver", "@command.dispatchers"]
+
+  command.dispatcher:
+    class : "Infrastructure\CommandDispatcher\ClassBased"
+    arguments: ["@command.dispatcher.identity_map"]
+
   front.product.factory:
     class: "Product\ReadStack\Factory\Doctrine"
 
@@ -18,7 +35,7 @@ services:
 
   basket.forms.add.handler:
     class: "Basket\Form\Add\Handler"
-    arguments: ["@customer.repository"]
+    arguments: ["@customer.repository", "@command.dispatcher"]
 
   customer.factory:
     class: "Customer\Factory\SessionIdBased"

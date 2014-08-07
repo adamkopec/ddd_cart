@@ -20,8 +20,9 @@ class Handler implements \Infrastructure\Form\Handler {
     /** @var  CommandDispatcher */
     protected $commandDispatcher;
 
-    public function __construct(Repository $customerRepository) {
+    public function __construct(Repository $customerRepository, CommandDispatcher $dispatcher) {
         $this->customerRepository = $customerRepository;
+        $this->commandDispatcher = $dispatcher;
     }
 
 
@@ -31,14 +32,14 @@ class Handler implements \Infrastructure\Form\Handler {
      */
     public function handle(array $values) {
         $quantity = $this->_getQuantity($values);
-        $currentCustomer = $this->customerRepository->getCurrentCustomer();
+        $currentCustomer = $this->customerRepository->getCurrent();
         $command = new AddProduct(
            $currentCustomer->getId(),
            Uuid::fromString($values['productId']),
            $quantity
         );
 
-
+        $result = $this->commandDispatcher->dispatch($command);
     }
 
     private function _getQuantity(array $values) {
