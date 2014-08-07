@@ -1,3 +1,6 @@
+parameters:
+    customer.session.namespace: customer
+
 services:
   front.product.factory:
     class: "Product\ReadStack\Factory\Doctrine"
@@ -15,3 +18,11 @@ services:
 
   basket.forms.add.handler:
     class: "Basket\Form\Add\Handler"
+    arguments: ["@customer.repository"]
+
+  customer.factory:
+    class: "Customer\Factory\SessionIdBased"
+
+  customer.repository:
+    class: "Customer\Repository\CurrentSession"
+    arguments: ["%customer.session.namespace%", "@customer.factory"]

@@ -9,8 +9,21 @@
 namespace Basket\Form\Add;
 
 use Basket\Command\AddProduct;
+use Rhumsaa\Uuid\Uuid;
+use Customer\Repository;
+use Infrastructure\CommandDispatcher;
 
 class Handler implements \Infrastructure\Form\Handler {
+
+    /** @var  Repository */
+    protected $customerRepository;
+    /** @var  CommandDispatcher */
+    protected $commandDispatcher;
+
+    public function __construct(Repository $customerRepository) {
+        $this->customerRepository = $customerRepository;
+    }
+
 
     /**
      * @param array $values
@@ -18,8 +31,10 @@ class Handler implements \Infrastructure\Form\Handler {
      */
     public function handle(array $values) {
         $quantity = $this->_getQuantity($values);
+        $currentCustomer = $this->customerRepository->getCurrentCustomer();
         $command = new AddProduct(
-           $values['productId'],
+           $currentCustomer->getId(),
+           Uuid::fromString($values['productId']),
            $quantity
         );
 
