@@ -12,15 +12,28 @@ use Infrastructure\AggregateRoot;
 use Basket\Exception;
 use Basket\Specification;
 use ValueObjects\Money\Money;
+use Basket\Entities\Product;
+use Rhumsaa\Uuid\Uuid;
 
 class Basket extends AggregateRoot {
 
+    /** @var Uuid */
+    private $id;
+    /** @var Product[]  */
     private $products = [];
     /** @var  Specification */
     private $specification;
 
-    public function __construct(Specification $specification) {
+    public function __construct(Uuid $id, Specification $specification) {
         $this->specification = $specification;
+        $this->id = $id;
+    }
+
+    /**
+     * @return \Rhumsaa\Uuid\Uuid
+     */
+    public function getId() {
+        return $this->id;
     }
 
     public function addProduct(Product $product) {

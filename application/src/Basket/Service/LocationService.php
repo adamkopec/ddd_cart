@@ -8,8 +8,14 @@
 
 namespace Basket\Service;
 
+use Customer\Entities\Customer as Customer;
+use Basket\Entities\Basket as Basket;
 
 interface LocationService {
 
+    /**
+     * @param Customer $c
+     * @return Basket
+     */
     public function getByCustomer(Customer $c);
 } 

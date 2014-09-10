@@ -15,8 +15,13 @@ class Basket_ProductController extends Zend_Controller_Action {
             if ($form->isValid($this->getRequest()->getPost())) {
                 try {
                     $handler = $this->_helper->container()->get('basket.forms.add.handler');
-                    $handler->handle($form->getValues());
-                    $this->_helper->flashMessenger->addMessage(['OK', 'Produkt został dodany do koszyka']);
+                    $result = $handler->handle($form->getValues());
+                    if (!$result->hasErrors()) {
+                        $this->_helper->flashMessenger->addMessage(['OK', 'Produkt został dodany do koszyka']);
+                        $this->_redirectToBasket();
+                    } else {
+                        $this->_helper->flashMessenger->addMessage(['ERR', $result->getErrors()]);
+                    }
                 } catch (Exception $e) {
                     $this->_helper->flashMessenger->addMessage(['ERR', 'Wystąpił błąd podczas dodawania produktu do koszyka']);
                 }
@@ -30,5 +35,9 @@ class Basket_ProductController extends Zend_Controller_Action {
 
     private function _redirectToCatalog() {
         return $this->_helper->redirector->goToRoute(array(), 'catalog', true);
+    }
+
+    private function _redirectToBasket() {
+        return $this->_helper->redirector->goToRoute(array(), 'basket', true);
     }
 }

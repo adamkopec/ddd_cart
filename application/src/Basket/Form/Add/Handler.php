@@ -12,6 +12,7 @@ use Basket\Command\AddProduct;
 use Rhumsaa\Uuid\Uuid;
 use Customer\Repository;
 use Infrastructure\CommandDispatcher;
+use Infrastructure\CommandResult;
 
 class Handler implements \Infrastructure\Form\Handler {
 
@@ -28,7 +29,7 @@ class Handler implements \Infrastructure\Form\Handler {
 
     /**
      * @param array $values
-     * @return void
+     * @return CommandResult
      */
     public function handle(array $values) {
         $quantity = $this->_getQuantity($values);
@@ -39,7 +40,7 @@ class Handler implements \Infrastructure\Form\Handler {
            $quantity
         );
 
-        $result = $this->commandDispatcher->dispatch($command);
+        return $this->commandDispatcher->dispatch($command);
     }
 
     private function _getQuantity(array $values) {

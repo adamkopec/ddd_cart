@@ -6,6 +6,14 @@ basket_add:
     controller: product
     action: add
 
+basket:
+  type: Zend_Controller_Router_Route_Static
+  route: basket
+  defaults:
+    module: basket
+    controller: index
+    action: index
+
 catalog:
   type: Zend_Controller_Router_Route_Static
   route: /

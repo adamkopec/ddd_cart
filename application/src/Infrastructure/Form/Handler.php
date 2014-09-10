@@ -8,11 +8,12 @@
 
 namespace Infrastructure\Form;
 
+use Infrastructure\CommandResult;
 
 interface Handler {
     /**
      * @param array $values
-     * @return void
+     * @return CommandResult
      */
     public function handle(array $values);
 } 
