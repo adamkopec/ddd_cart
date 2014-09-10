@@ -1,0 +1,10 @@
+parameters:
+    customer.session.namespace: customer
+
+services:
+  customer.factory:
+    class: "Customer\Factory\SessionIdBased"
+
+  customer.repository:
+    class: "Customer\Repository\CurrentSession"
+    arguments: ["%customer.session.namespace%", "@customer.factory"]

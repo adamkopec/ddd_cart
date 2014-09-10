@@ -8,17 +8,12 @@
 
 namespace Product\ReadStack\Repository;
 
+use Infrastructure\DoctrineRepository;
 use Product\ProductData;
 use Product\ReadStack\Repository;
 use Product\ReadStack\Factory;
 
-class Doctrine implements Repository {
-    /** @var  Factory */
-    private $factory;
-
-    public function __construct(Factory $factory) {
-        $this->factory = $factory;
-    }
+class Doctrine extends DoctrineRepository implements Repository {
 
     /**
      * @return ProductData[]
@@ -49,28 +44,4 @@ class Doctrine implements Repository {
         return $q;
     }
 
-    /**
-     * @param \OrmProduct[] $ormProducts
-     * @return array
-     */
-    private function _hydrate($ormProducts) {
-        $ret = array();
-        foreach($ormProducts as $orm) {
-            $ret[] = $this->factory->create($orm);
-        }
-        return $ret;
-    }
-
-    /**
-     * @param \Doctrine_Query $q
-     * @return array
-     */
-    private function _toArray(\Doctrine_Query $q) {
-        $products = $q->execute();
-        if ($products) {
-            return $this->_hydrate($products);
-        } else {
-            return array();
-        }
-    }
 } 

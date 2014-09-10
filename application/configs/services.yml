@@ -1,45 +1,5 @@
-parameters:
-    customer.session.namespace: customer
-
-services:
-  basket.add.command.dispatcher:
-    class: "Basket\Command\Dispatcher\AddProduct"
-
-  command.dispatchers:
-    - "@basket.add.command.dispatcher"
-
-  command.dispatcher.identity_resolver:
-    class: "Infrastructure\CommandDispatcher\IdentityResolver"
-
-  command.dispatcher.identity_map:
-    class: "Infrastructure\IdentityMap"
-    arguments: ["@command.dispatcher.identity_resolver", "@command.dispatchers"]
-
-  command.dispatcher:
-    class : "Infrastructure\CommandDispatcher\ClassBased"
-    arguments: ["@command.dispatcher.identity_map"]
-
-  front.product.factory:
-    class: "Product\ReadStack\Factory\Doctrine"
-
-  front.product.repository:
-    class:  "Product\ReadStack\Repository\Doctrine"
-    arguments: ["@front.product.factory"]
-
-  front.product.model.catalog:
-    class: "\Default_Model_Catalog"
-    arguments: ["@front.product.repository", "@basket.forms.add.builder"]
-
-  basket.forms.add.builder:
-    class: "Basket\Form\Add\Builder"
-
-  basket.forms.add.handler:
-    class: "Basket\Form\Add\Handler"
-    arguments: ["@customer.repository", "@command.dispatcher"]
-
-  customer.factory:
-    class: "Customer\Factory\SessionIdBased"
-
-  customer.repository:
-    class: "Customer\Repository\CurrentSession"
-    arguments: ["%customer.session.namespace%", "@customer.factory"]
+imports:
+    - { resource: "./service/product.yml" }
+    - { resource: "./service/customer.yml" }
+    - { resource: "./service/basket.yml" }
+    - { resource: "./service/common.yml" }

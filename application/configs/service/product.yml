@@ -1,0 +1,19 @@
+services:
+  front.product.factory:
+      class: "Product\ReadStack\Factory\Doctrine"
+
+  front.product.repository:
+    class:  "Product\ReadStack\Repository\Doctrine"
+    arguments: ["@front.product.factory"]
+
+  front.product.model.catalog:
+    class: "\Default_Model_Catalog"
+    arguments: ["@front.product.repository", "@basket.forms.add.builder"]
+
+
+  back.product.factory:
+    class: "Product\UpdateStack\Factory\Doctrine"
+
+  back.product.repository:
+    class:  "Product\UpdateStack\Repository\Doctrine"
+    arguments: ["@back.product.factory"]

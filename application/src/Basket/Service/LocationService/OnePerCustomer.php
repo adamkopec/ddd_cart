@@ -19,7 +19,6 @@ class OnePerCustomer implements LocationService {
      * @return Basket
      */
     public function getByCustomer(Customer $c) {
-        // TODO: Implement getByCustomer() method.
-    }
 
+    }
 } 

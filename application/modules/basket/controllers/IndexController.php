@@ -9,8 +9,11 @@
 class Basket_IndexController extends Zend_Controller_Action {
 
     public function indexAction() {
-        $basketProductRepository = $this->_helper->container()->get('basket.front.repository');
-
-        $this->view->basketProducts = $basketProductRepository->get
+        $container = $this->_helper->container();
+        $customer = $container->get('customer.repository')->getCurrent();
+        /** @var Basket_Model_Overview $model */
+        $model = $container->get('front.basket.model.overview');
+        $model->setCustomer($customer);
+        $this->view->assign($model->getValues());
     }
-} 
+}

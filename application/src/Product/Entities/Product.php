@@ -53,6 +53,13 @@ class Product extends AggregateRoot {
         return clone $this->baseUnit;
     }
 
+    /**
+     * @param \Common\Unit $baseUnit
+     */
+    public function setBaseUnit(Unit $baseUnit) {
+        $this->baseUnit = $baseUnit;
+    }
+
     public function archive() {
         if ($this->archived) {
             throw new ProductInvariantException("Archived product cannot be archived once more");

@@ -1,0 +1,38 @@
+parameters:
+    basket.session.namespace: basket
+
+services:
+  basket.add.command.dispatcher:
+    class: "Basket\Command\Dispatcher\AddProduct"
+    arguments: ["@customer.repository", "@back.product.repository", "@basket.location.service", "@basket.product.factory"]
+
+  front.basket.model.overview:
+    class: "\Basket_Model_Overview"
+    arguments: ["@basket.repository", "@basket.forms.add.builder"]
+
+  basket.forms.add.builder:
+    class: "Basket\Form\Add\Builder"
+
+  basket.forms.add.handler:
+    class: "Basket\Form\Add\Handler"
+    arguments: ["@customer.repository", "@command.dispatcher"]
+
+  basket.location.service:
+    class: "Basket\Service\LocationService\OnePerCustomer"
+    arguments: ["@basket.repository"]
+
+  basket.specification.provider:
+    class: "Basket\Service\SpecificationProvider\Example"
+
+  basket.product.factory:
+    class: "Basket\Product\Factory\Simple"
+
+  basket.repository:
+    class: "Basket\Repository\CurrentSession"
+    arguments: ["%basket.session.namespace%", "@basket.factory"]
+
+  basket.factory:
+    class: "Basket\Factory\Simple"
+    arguments: ["@basket.specification.provider"]
+
+
