@@ -20,4 +20,17 @@ interface Repository {
      * @throws BasketNotFoundException
      */
     public function getById(Uuid $id);
+
+    /**
+     * @param Uuid $id
+     * @return Basket
+     * @throws BasketNotFoundException
+     */
+    public function getByCustomerId(Uuid $id);
+
+    /**
+     * @param Basket $basket
+     * @return void
+     */
+    public function persist(Basket $basket);
 } 

@@ -17,7 +17,7 @@ class TableRowBasedFactory implements Factory {
 
     private $product;
 
-    public function __construct(EisProduct $product) {
+    public function __construct(OrmProduct $product) {
         $this->product = $product;
     }
 

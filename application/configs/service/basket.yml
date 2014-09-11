@@ -4,7 +4,11 @@ parameters:
 services:
   basket.add.command.dispatcher:
     class: "Basket\Command\Dispatcher\AddProduct"
-    arguments: ["@customer.repository", "@back.product.repository", "@basket.location.service", "@basket.product.factory"]
+    arguments:
+      - "@customer.repository"
+      - "@back.product.repository"
+      - "@basket.location.service"
+      - "@basket.adding.service"
 
   front.basket.model.overview:
     class: "\Basket_Model_Overview"
@@ -21,6 +25,10 @@ services:
     class: "Basket\Service\LocationService\OnePerCustomer"
     arguments: ["@basket.repository"]
 
+  basket.adding.service:
+    class: "Basket\Service\Adder\Persistent"
+    arguments: ["@basket.repository"]
+
   basket.specification.provider:
     class: "Basket\Service\SpecificationProvider\Example"
 
@@ -29,7 +37,7 @@ services:
 
   basket.repository:
     class: "Basket\Repository\CurrentSession"
-    arguments: ["%basket.session.namespace%", "@basket.factory"]
+    arguments: ["%basket.session.namespace%"]
 
   basket.factory:
     class: "Basket\Factory\Simple"

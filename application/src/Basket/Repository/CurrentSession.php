@@ -6,44 +6,61 @@
  * Time: 16:25
  */
 
-namespace Customer\Repository;
+namespace Basket\Repository;
 
-use Customer\Entities\Customer;
-use Customer\Exception\CustomerNotFoundException;
-use Customer\Repository;
-use Customer\Factory;
+use Basket\Entities\Basket;
+use Basket\Exception\BasketNotFoundException;
+use Basket\Repository;
+use Rhumsaa\Uuid\Uuid;
 
 class CurrentSession implements Repository {
     /** @var  string */
     protected $namespaceName;
     /** @var  \Zend_Session_Namespace */
     protected $session;
-    /** @var  Factory */
-    protected $factory;
 
     /**
      * @param string $namespaceName
-     * @param Factory $factory
      */
-    public function __construct($namespaceName, Factory $factory) {
+    public function __construct($namespaceName) {
         $this->namespaceName = $namespaceName;
-        $this->factory = $factory;
     }
 
     /**
-     * @return Customer
-     * @throws CustomerNotFoundException
+     * @param Uuid $id
+     * @return Basket
+     * @throws BasketNotFoundException
      */
-    public function getCurrentCustomer() {
-        if (!$this->session) {
-            $this->_initSession();
+    public function getById(Uuid $id) {
+        $this->_initSession();
+        $stringId = $id->toString();
+        if (isset($this->session->basket)) {
+            return $this->session->basket;
+        } else {
+            throw new BasketNotFoundException("No baskets found with id $stringId");
         }
+    }
 
-        if (!isset($this->session->customer)) {
-            $this->session->customer = $this->factory->createCustomer();
+    /**
+     * @param Uuid $id
+     * @return Basket
+     * @throws BasketNotFoundException
+     */
+    public function getByCustomerId(Uuid $id) {
+        $this->_initSession();
+        if (isset($this->session->basket)) {
+            return $this->session->basket;
+        } else {
+            throw new BasketNotFoundException("No baskets found for customer $id");
         }
+    }
 
-        return $this->session->customer;
+    /**
+     * @param Basket $basket
+     * @return void
+     */
+    public function persist(Basket $basket) {
+        $this->session[$basket->getId()->toString()] = $basket;
     }
 
     private function _initSession() {

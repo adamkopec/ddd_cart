@@ -12,7 +12,7 @@ use Basket\Command\AddProduct as Command;
 use Customer\Repository as CustomerRepository;
 use Product\UpdateStack\Repository as ProductRepository;
 use Basket\Service\LocationService;
-use Basket\Product\Factory\Simple as BasketProductFactory;
+use Basket\Service\Adder as AddingService;
 use Basket\Command\Result\AddProduct as CommandResult;
 
 class AddProduct {
@@ -22,19 +22,19 @@ class AddProduct {
     private $productRepository;
     /** @var  LocationService */
     private $basketLocationService;
-    /** @var  BasketProductFactory */
-    private $basketProductFactory;
+    /** @var  AddingService */
+    private $basketAddingService;
 
     public function __construct(
         CustomerRepository $customerRepository,
         ProductRepository $productRepository,
         LocationService $service,
-        BasketProductFactory $factory
+        AddingService $addingService
     ) {
         $this->customerRepository = $customerRepository;
         $this->productRepository = $productRepository;
         $this->basketLocationService = $service;
-        $this->basketProductFactory = $factory;
+        $this->basketAddingService = $addingService;
     }
 
     /**
@@ -48,12 +48,7 @@ class AddProduct {
 
             $product = $this->productRepository->getById($c->getProductId());
 
-            $basketProduct = $this->basketProductFactory->createFromProduct($product);
-            $basketProduct->setQuantity($c->getQuantity());
-
-            $basket->addProduct($basketProduct);
-
-            //
+            $this->basketAddingService->add($product, $basket, $c->getQuantity());
 
             return new CommandResult();
         } catch (\Exception $e) {

@@ -32,15 +32,8 @@ class SimpleFactory implements Factory {
      */
     public function create() {
         $constantPolicy = new Constant($this->basePrice);
-        $minimalPolicy = new MultipliedByFactor($this->basePrice, 0.9);
 
-        $policies = array(
-            PriceType::CATALOG => $constantPolicy,
-            PriceType::MINIMAL => $minimalPolicy,
-            PriceType::SELLING => $constantPolicy
-        );
-
-        $product = new Product(Uuid::uuid4(), $policies);
+        $product = new Product(Uuid::uuid4(), $constantPolicy);
         $product->setName($this->name);
         return $product;
     }

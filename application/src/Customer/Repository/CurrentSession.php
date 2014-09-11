@@ -12,6 +12,7 @@ use Customer\Entities\Customer;
 use Customer\Exception\CustomerNotFoundException;
 use Customer\Repository;
 use Customer\Factory;
+use Rhumsaa\Uuid\Uuid;
 
 class CurrentSession implements Repository {
     /** @var  string */
@@ -34,7 +35,7 @@ class CurrentSession implements Repository {
      * @return Customer
      * @throws CustomerNotFoundException
      */
-    public function getCurrentCustomer() {
+    public function getCurrent() {
         if (!$this->session) {
             $this->_initSession();
         }
@@ -45,6 +46,16 @@ class CurrentSession implements Repository {
 
         return $this->session->customer;
     }
+
+    /**
+     * @param Uuid $id
+     * @return Customer
+     * @throws CustomerNotFoundException
+     */
+    public function getById(Uuid $id) {
+        return $this->getCurrent();
+    }
+
 
     private function _initSession() {
         $this->session = new \Zend_Session_Namespace($this->namespaceName);

@@ -9,16 +9,23 @@
 namespace Basket\Service\LocationService;
 
 use Basket\Entities\Basket;
+use Basket\Repository;
 use Basket\Service\LocationService;
 use Customer\Entities\Customer;
 
 class OnePerCustomer implements LocationService {
+    /** @var  Repository */
+    private $basketRepository;
+
+    public function __construct(Repository $basketRepository) {
+        $this->basketRepository = $basketRepository;
+    }
 
     /**
      * @param Customer $c
      * @return Basket
      */
     public function getByCustomer(Customer $c) {
-
+        return $this->basketRepository->getByCustomerId($c->getId());
     }
 } 
