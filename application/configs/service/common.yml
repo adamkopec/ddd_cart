@@ -1,13 +1,12 @@
 services:
-  command.dispatchers:
-    - "@basket.add.command.dispatcher"
-
   command.dispatcher.identity_resolver:
     class: "Infrastructure\CommandDispatcher\IdentityResolver"
 
   command.dispatcher.identity_map:
     class: "Infrastructure\IdentityMap"
-    arguments: ["@command.dispatcher.identity_resolver", "@command.dispatchers"]
+    arguments:
+      - "@command.dispatcher.identity_resolver"
+      - ["@basket.add.command.dispatcher"]
 
   command.dispatcher:
     class : "Infrastructure\CommandDispatcher\ClassBased"

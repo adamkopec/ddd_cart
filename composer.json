@@ -14,6 +14,17 @@
         "codeception/codeception": "*",
         "deresh/sfyaml": "dev-master"
     },
+    "autoload": {
+        "psr-4": {
+            "Application\\": "application/src/Application/",
+            "Basket\\": "application/src/Basket/",
+            "Infrastructure\\": "application/src/Infrastructure/",
+            "Order\\": "application/src/Order/",
+            "Product\\": "application/src/Product/",
+            "Common\\": "application/src/Common/",
+            "Customer\\": "application/src/Customer/"
+        }
+    },
     "authors": [
         {
             "name": "Adam Kopeć",

@@ -11,36 +11,36 @@ services:
       - "@basket.adding.service"
 
   front.basket.model.overview:
-    class: "\Basket_Model_Overview"
-    arguments: ["@basket.repository", "@basket.forms.add.builder"]
+    class: "\\Basket_Model_Overview"
+    arguments: ["@basket.repository", "@front.product.repository"]
 
   basket.forms.add.builder:
-    class: "Basket\Form\Add\Builder"
+    class: "Basket\\Form\\Add\\Builder"
 
   basket.forms.add.handler:
-    class: "Basket\Form\Add\Handler"
+    class: "Basket\\Form\\Add\\Handler"
     arguments: ["@customer.repository", "@command.dispatcher"]
 
   basket.location.service:
-    class: "Basket\Service\LocationService\OnePerCustomer"
-    arguments: ["@basket.repository"]
+    class: "Basket\\Service\\LocationService\\OnePerCustomer"
+    arguments: ["@basket.repository", "@basket.factory"]
 
   basket.adding.service:
-    class: "Basket\Service\Adder\Persistent"
-    arguments: ["@basket.repository"]
+    class: "Basket\\Service\\Adder\\Persistent"
+    arguments: ["@basket.product.factory", "@basket.repository"]
 
   basket.specification.provider:
-    class: "Basket\Service\SpecificationProvider\Example"
+    class: "Basket\\Service\\SpecificationProvider\\Example"
 
   basket.product.factory:
-    class: "Basket\Product\Factory\Simple"
+    class: "Basket\\Product\\Factory\\Simple"
 
   basket.repository:
-    class: "Basket\Repository\CurrentSession"
+    class: "Basket\\Repository\\CurrentSession"
     arguments: ["%basket.session.namespace%"]
 
   basket.factory:
-    class: "Basket\Factory\Simple"
+    class: "Basket\\Factory\\Simple"
     arguments: ["@basket.specification.provider"]
 
 

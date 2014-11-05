@@ -1,5 +1,5 @@
 imports:
+    - { resource: "./service/common.yml" }
     - { resource: "./service/product.yml" }
     - { resource: "./service/customer.yml" }
     - { resource: "./service/basket.yml" }
-    - { resource: "./service/common.yml" }

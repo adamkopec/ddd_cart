@@ -35,13 +35,6 @@ production:
     layout:
       layoutPath: "APPLICATION_PATH/layout/scripts"
     modules:
-    namespaces:
-      names:
-        - Application
-        - Basket
-        - Infrastructure
-        - Order
-        - Product
     routes:
       files:
         - "APPLICATION_PATH/configs/routes.yml"

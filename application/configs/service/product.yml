@@ -1,6 +1,6 @@
 services:
   front.product.factory:
-      class: "Product\ReadStack\Factory\Doctrine"
+    class: "Product\ReadStack\Factory\Doctrine"
 
   front.product.repository:
     class:  "Product\ReadStack\Repository\Doctrine"
