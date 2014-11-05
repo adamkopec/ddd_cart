@@ -18,6 +18,14 @@
 </head>
 <body>
     <div class="container">
+        <?php
+        $messenger = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+        echo '<div style="padding: 10px 0">';
+        foreach($messenger->getMessages() as $message) {
+            echo '<div class="alert alert-' . $message[0] . '">' . $message[1] . '</div>';
+        }
+        echo '</div>';
+        ?>
         <?php echo $this->layout()->content ?>
     </div>
 
