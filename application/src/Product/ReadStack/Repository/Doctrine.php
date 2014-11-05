@@ -12,6 +12,7 @@ use Infrastructure\DoctrineRepository;
 use Product\ProductData;
 use Product\ReadStack\Repository;
 use Product\ReadStack\Factory;
+use Rhumsaa\Uuid\Uuid;
 
 class Doctrine extends DoctrineRepository implements Repository {
 
@@ -32,6 +33,17 @@ class Doctrine extends DoctrineRepository implements Repository {
         $q->where('p.name = ?', $name);
 
         return $this->_toArray($q);
+    }
+
+    /**
+     * @param Uuid $uuid
+     * @return ProductData
+     */
+    public function getById(Uuid $uuid) {
+        $q = $this->_getBaseQuery();
+        $q->where('p.id = ?', $uuid->toString());
+
+        return $this->_getOne($q);
     }
 
     /**

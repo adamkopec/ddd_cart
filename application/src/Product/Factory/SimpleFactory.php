@@ -10,10 +10,8 @@ namespace Product\Factory;
 
 use Product\Entities;
 use Product\Factory;
-use Product\PriceType;
 use Product\Entities\Product;
 use Product\PricePolicy\Constant;
-use Product\PricePolicy\MultipliedByFactor;
 use Rhumsaa\Uuid\Uuid;
 use ValueObjects\Money\Money;
 

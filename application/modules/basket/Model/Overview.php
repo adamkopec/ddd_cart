@@ -10,15 +10,21 @@ class Basket_Model_Overview implements Infrastructure\Model {
     /**
      * @var Basket\Repository
      */
-    private $repository;
+    private $basketRepository;
+    /**
+     * @var Product\ReadStack\Repository
+     */
+    private $productRepository;
 
     /**
      * @var \Customer\Entities\Customer
      */
     private $customer;
 
-    public function __construct(Basket\Repository $repository) {
-        $this->repository = $repository;
+    public function __construct(Basket\Repository $repository, Product\ReadStack\Repository $productRepository) {
+        $this->basketRepository = $repository;
+        $this->productRepository = $productRepository;
+
     }
 
     /**
@@ -37,10 +43,16 @@ class Basket_Model_Overview implements Infrastructure\Model {
             throw new RuntimeException("There is no customer to fetch basket of");
         }
 
-        $basket = $this->repository->getByCustomer($this->customer);
+        $basket = $this->basketRepository->getByCustomerId($this->customer->getId());
 
         return array(
-            'basket' => $basket
+            'basket' => $basket,
+            'products' => array_map(function (\Basket\Entities\Product $product) {
+                return array(
+                    'catalog_product' => $this->productRepository->getById($product->getId()),
+                    'entity' => $product
+                );
+            }, $basket->getProducts())
         );
     }
 } 

@@ -60,7 +60,7 @@ class CurrentSession implements Repository {
      * @return void
      */
     public function persist(Basket $basket) {
-        $this->session[$basket->getId()->toString()] = $basket;
+        $this->session->basket = $basket;
     }
 
     private function _initSession() {

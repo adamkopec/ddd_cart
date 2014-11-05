@@ -1,0 +1,25 @@
+<h1>Koszyk</h1>
+<table class="mainBasketTable table">
+    <thead>
+    <tr>
+        <th>L.p.</th>
+        <th>Nazwa</th>
+        <th>Ilość</th>
+        <th>Wartość</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php $i=1; ?>
+    <?php foreach($this->products as $product): ?>
+        <tr class="basketProductRow">
+            <td><?= $i; ?></td>
+            <td><?= $product['catalog_product']->getName(); ?></td>
+            <td><?= $product['entity']->getQuantity() . $product['catalog_product']->getUnitSymbol(); ?></td>
+            <td>
+                <?= $product['entity']->getTotal(); ?>
+            </td>
+        </tr>
+        <?php $i++; ?>
+    <?php endforeach; ?>
+    </tbody>
+</table>

@@ -20,7 +20,7 @@ class Simple implements Factory {
      * @return BasketProduct
      */
     public function createFromProduct(CatalogProduct $product) {
-        $basketProduct = new BasketProduct(Uuid::uuid4());
+        $basketProduct = new BasketProduct($product->getId());
         $basketProduct->setPrice($product->getPrice());
         return $basketProduct;
     }

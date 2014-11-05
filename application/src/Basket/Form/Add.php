@@ -23,7 +23,7 @@ class Add extends \Zend_Form {
                 array('Between', false, array('min' => 0, 'max' => 99))
             ),
             'decorators' => ['ViewHelper'],
-            'multiOptions' => array(1,5,10)
+            'multiOptions' => array(1=>1,5=>5,10=>10)
         ));
         $this->addElement('submit', 'submit');
     }

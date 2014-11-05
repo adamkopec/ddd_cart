@@ -21,7 +21,7 @@ class Constant implements PricePolicy {
 
     public function __construct(Money $value) {
         $this->value = $value;
-        Assertion::min($value->getAmount(), 0, "Price value is less than zero");
+        Assertion::min($value->getAmount()->toNative(), 0, "Price value is less than zero");
     }
 
     /**

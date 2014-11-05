@@ -9,6 +9,7 @@
 namespace Product\ReadStack;
 
 use Product\ProductData;
+use Rhumsaa\Uuid\Uuid;
 
 interface Repository {
     /**
@@ -21,4 +22,10 @@ interface Repository {
      * @return ProductData[]
      */
     public function getByName($name);
+
+    /**
+     * @param Uuid $uuid
+     * @return ProductData
+     */
+    public function getById(Uuid $uuid);
 } 

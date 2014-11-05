@@ -11,6 +11,7 @@ namespace Basket\Entities;
 use ValueObjects\Money\Money;
 use Rhumsaa\Uuid\Uuid;
 use Common\Unit;
+use ValueObjects\Number\Real;
 
 class Product {
     /** @var  Uuid */
@@ -27,7 +28,7 @@ class Product {
     }
 
     public function getTotal() {
-        return $this->price * $this->quantity;
+        return $this->price->multiply(new Real($this->quantity));
     }
 
     /**
@@ -58,6 +59,11 @@ class Product {
         return $this->quantity;
     }
 
-
+    /**
+     * @return Uuid
+     */
+    public function getId() {
+        return $this->id;
+    }
 
 }

@@ -9,6 +9,7 @@
 namespace Basket\Command\Dispatcher;
 
 use Basket\Command\AddProduct as Command;
+use Basket\Exception\SpecificationException;
 use Customer\Repository as CustomerRepository;
 use Product\UpdateStack\Repository as ProductRepository;
 use Basket\Service\LocationService;
@@ -51,6 +52,8 @@ class AddProduct {
             $this->basketAddingService->add($product, $basket, $c->getQuantity());
 
             return new CommandResult();
+        } catch(SpecificationException $exception) {
+            return new CommandResult(array("Nie udało się dodać produktu do koszyka z powodu ograniczeń nałożonych przez administratora"));
         } catch (\Exception $e) {
             return new CommandResult(array('Nie udało się :('));
         }

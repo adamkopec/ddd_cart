@@ -12,6 +12,7 @@ use Common\Unit;
 use Product\Entities\Product;
 use Product\PricePolicy\Constant;
 use Product\UpdateStack\Factory;
+use Rhumsaa\Uuid\Uuid;
 use ValueObjects\Money\Money;
 
 class Doctrine implements Factory {
@@ -21,7 +22,7 @@ class Doctrine implements Factory {
      */
     public function create($source) {
         //nie przechowujemy na razie innych wariantów polityk
-        $p = new Product($source->id, new Constant(Money::fromNative($source->catalog_price, 'PLN')));
+        $p = new Product(Uuid::fromString($source->id), new Constant(Money::fromNative($source->catalog_price, 'PLN')));
         $p->setName($source->name);
         $p->setBaseUnit(new Unit($source->OrmUnit->symbol));
 

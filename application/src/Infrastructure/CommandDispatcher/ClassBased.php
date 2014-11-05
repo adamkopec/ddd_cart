@@ -9,7 +9,6 @@
 namespace Infrastructure\CommandDispatcher;
 
 use Infrastructure\CommandDispatcher;
-use Infrastructure\CommandDispatcher\DispatchResult;
 use Infrastructure\IdentityMap;
 
 class ClassBased implements CommandDispatcher {

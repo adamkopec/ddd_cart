@@ -12,8 +12,8 @@ use Infrastructure\AggregateRoot;
 use Basket\Exception;
 use Basket\Specification;
 use ValueObjects\Money\Money;
-use Basket\Entities\Product;
 use Rhumsaa\Uuid\Uuid;
+use Basket\Exception\SpecificationException;
 
 class Basket extends AggregateRoot {
 
@@ -37,10 +37,20 @@ class Basket extends AggregateRoot {
     }
 
     public function addProduct(Product $product) {
-        if ($this->specification->isMetBy($product)) {
-            $this->products[] = $product;
+        $candidate = clone $product;
+        $candidateKey = null;
+        foreach ($this->products as $key => $existingProduct) {
+            if ($existingProduct->getId() == $product->getId()) {
+                $candidate->setQuantity($existingProduct->getQuantity() + $product->getQuantity());
+                $candidateKey = $key;
+                break;
+            }
+        }
+
+        if ($this->specification->isMetBy($candidate)) {
+            $this->products[$candidateKey] = $candidate;
         } else {
-            throw new Exception("This product cannot be added to this basket");
+            throw new SpecificationException("This product cannot be added to this basket");
         }
     }
 

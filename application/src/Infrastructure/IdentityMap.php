@@ -8,8 +8,6 @@
 
 namespace Infrastructure;
 
-use Infrastructure\IdentityResolver;
-
 class IdentityMap implements \Countable {
 
     private $map = [];
@@ -85,6 +83,10 @@ class IdentityMap implements \Countable {
         return count($this->map);
     }
 
+    /**
+     * @param $offset
+     * @return string
+     */
     private function _resolveOffset($offset) {
         if (is_object($offset)) {
             $offset = get_class($offset);
