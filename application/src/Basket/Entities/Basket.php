@@ -48,7 +48,11 @@ class Basket extends AggregateRoot {
         }
 
         if ($this->specification->isMetBy($candidate)) {
-            $this->products[$candidateKey] = $candidate;
+            if (is_null($candidateKey)) {
+                $this->products[] = $candidate;
+            } else {
+                $this->products[$candidateKey] = $candidate;
+            }
         } else {
             throw new SpecificationException("This product cannot be added to this basket");
         }
