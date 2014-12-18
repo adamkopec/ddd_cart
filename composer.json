@@ -4,6 +4,7 @@
     "require": {
         "zendframework/zendframework1": "1.*",
         "doctrine/doctrine1": "1.2.*",
+        "doctrine/common": "~2.4",
         "phpunit/phpunit": "*",
         "monolog/monolog": "*",
         "nicolopignatelli/valueobjects": "*",
